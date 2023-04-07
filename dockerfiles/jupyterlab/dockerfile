@@ -8,8 +8,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 USER jovyan
 
-COPY configs/jupyter_server_config.py /tmp/
+COPY configs/jupyter_server_config.py /opt/
 
 EXPOSE 8888
 
-CMD ["/bin/bash", "-c", "envsubst < /tmp/jupyter_server_config.py > /home/jovyan/.jupyter/jupyter_server_config.py && start-notebook.sh"]
+CMD ["/bin/bash", "-c", "envsubst < /opt/jupyter_server_config.py > /home/jovyan/.jupyter/jupyter_server_config.py && start-notebook.sh"]
