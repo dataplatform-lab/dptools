@@ -1,0 +1,15 @@
+FROM jupyter/base-notebook
+
+USER root
+
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get update && \
+    apt-get install -y curl gettext-base
+
+USER jovyan
+
+COPY configs/jupyter_server_config.py /tmp/
+
+EXPOSE 8888
+
+CMD ["/bin/bash", "-c", "envsubst < /tmp/jupyter_server_config.py > /home/jovyan/.jupyter/jupyter_server_config.py && start-notebook.sh"]
